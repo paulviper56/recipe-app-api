@@ -12,6 +12,7 @@ jobs:
         with:
           username: ${{ secrets.DOCKERHUB_USER }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
+          debug: true
       - name: Checkout
         uses: actions/checkout@v2
       - name: Test
