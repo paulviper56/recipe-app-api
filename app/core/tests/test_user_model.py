@@ -13,12 +13,17 @@ class UserModelTest(TestCase):
         user = User.objects.create_user(email=email, password=password)
         self.assertEqual(user.email,email)
         self.assertTrue(user.check_password(password))
-'''
-    def test_create_user_successful_with_normalize_email(self):
-        this test for normalizing the
-        payload =[
-            ['test1234@Example.com', 'test1234@example.com'],
-            ['Test1234@Example.com', '']
-        ]
 
-'''
+    def test_create_user_successful_with_normalize_email(self):
+        '''this test for normalizing the'''
+        sample_email =[
+            ['test1@Example.com', 'test1@example.com'],
+            ['Test2@Example.com', 'Test2@example.com'],
+            ['TESt3@example.com', 'TESt3@example.com']
+        ]
+        for email, expected in sample_email :
+            user = get_user_model().objects.create_user(
+                email = email,
+                password= 'pass1234'
+            )
+            self.assertEqual(user.email,expected)
