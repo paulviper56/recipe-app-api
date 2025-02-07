@@ -143,8 +143,9 @@ class PrivateRecipeAPITest(TestCase):
         res = self.client.put(url, payload, format='json')
         recipe.refresh_from_db()
         self.assertEqual(res.status_code, status.HTTP_200_OK)
-        self.assertEqual(recipe.price, payload['price'])
-        self.assertEqual(recipe.title, payload['title'])
+        for i, k in payload.items():
+            self.assertEqual(getattr(recipe, i), k)
+        self.assertEqual(recipe.user, self.user)
 
 
 
